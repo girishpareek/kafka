@@ -31,7 +31,7 @@
 ### Additional Kafka information:
 https://kafka.apache.org/uses
 https://zookeeper.apache.org/
- .\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
  
  
 
