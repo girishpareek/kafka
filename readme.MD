@@ -32,6 +32,57 @@
 https://kafka.apache.org/uses
 https://zookeeper.apache.org/  == To know what zooker does?
 
+    Staring Zookeeper
+
+    ./bin/zookeeper-server-start.sh ./config/zookeeper.properties == for mac or linux
+    C:\Users\030841744\Desktop\kafka> .\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties == for windows
+
+    Starting Kafka
+
+    ./bin/kafka-server-start.sh ./config/server.properties
+    C:\Users\030841744\Desktop\kafka>.\bin\windows\kafka-server-start.bat  .\config\server.properties
+
+    list all the topics
+
+    bin/kafka-topics.sh --bootstrap-server localhost:9092 --list
+    
+
+    create topic
+
+    bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic first_topic
+    Consumer will get only latest messages after it got started and sent by publisher after starting consumer. Once consumed then Consumer can't use it again. 
+
+    bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic second-topic
+
+    bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic third-topic
+
+    bin/kafka-console-producer.sh --bootstrap-server localhost:9092 --topic first_topic
+
+    bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic first_topic
+
+   ** to read all data**
+
+    bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic first_topic --from-beginning
+
+    **to describe the topic**
+
+    kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic first_topic
+
+    **to describe all topics**
+
+    kafka-topics.sh --bootstrap-server localhost:9092 --describe
+
+   ** passing key,value**
+
+    kafka-console-producer.sh --bootstrap-server localhost:9092 --topic second-topic --property parse.key=true --property key.separator=:
+
+    kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic second-topic --property print.key=true --property print.value=true
+
+    kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic second-topic --property print.key=true --property print.value=true --property print.timestamp=true
+
+    kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic second-topic --property print.key=true --property print.value=true --property print.timestamp=true --formatter kafka.tools.DefaultMessageFormatter
+
+
 Commands: 
 First you need to keep the command into Kafka Folder: 
 **To start zeekeeper server:** .\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties ===> for Windows
@@ -86,27 +137,13 @@ Type messages as:
 >you?
 
 Consumer: C:\Users\030841744\Desktop\kafka\bin\windows>kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic first_topic
-Consumer will get only latest messages after it got started and sent by publisher after starting consumer. Once consumed then Consumer can't use it again. 
+
 
 
 
 
 
 https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/19.0.x?topic=emitter-enabling-kafka-broker-trace
-
-
-.\bin\windows\kafka-topics.bat --bootstrap-server --list
-
-
-
- 
- 
-
-
-
-## Introduction 
-
-- 
 
 
 
