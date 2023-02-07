@@ -36,6 +36,10 @@ https://zookeeper.apache.org/  == To know what zooker does?
 
     ./bin/zookeeper-server-start.sh ./config/zookeeper.properties == for mac or linux
     C:\Users\030841744\Desktop\kafka> .\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties == for windows
+Incase if Zookeeper doesn't run then: 
+Command 1: netstat -ano | findstr :2181
+
+Command 2: taskkill /PID YourID /F 
 
     Starting Kafka
 
@@ -45,14 +49,17 @@ https://zookeeper.apache.org/  == To know what zooker does?
     list all the topics
 
     bin/kafka-topics.sh --bootstrap-server localhost:9092 --list
-    
+    C:\Users\030841744\Desktop\kafka>.\bin\windows\kafka-topics.bat --bootstrap-server localhost:9092 --list
 
-    create topic
+   ** create topic**
 
     bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic first_topic
+  1.  Listing the existing Topics:  C:\Users\030841744\Desktop\kafka>.\bin\windows\kafka-topics.bat --bootstrap-server localhost:9092 --list
+    
     Consumer will get only latest messages after it got started and sent by publisher after starting consumer. Once consumed then Consumer can't use it again. 
 
     bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic second-topic
+    C:\Users\030841744\Desktop\kafka>.\bin\windows\kafka-topics.bat --bootstrap-server localhost:9092 --create --topic Day2_first_topic
 
     bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic third-topic
 
@@ -63,16 +70,18 @@ https://zookeeper.apache.org/  == To know what zooker does?
    ** to read all data**
 
     bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic first_topic --from-beginning
+    C:\Users\030841744\Desktop\kafka>.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic first_topic --from-beginning
 
     **to describe the topic**
 
     kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic first_topic
+   C:\Users\030841744\Desktop\kafka>.\bin\windows\kafka-topics.bat --bootstrap-server localhost:9092 --topic first_topic --describe
 
     **to describe all topics**
 
     kafka-topics.sh --bootstrap-server localhost:9092 --describe
 
-   ** passing key,value**
+ **  passing key,value**
 
     kafka-console-producer.sh --bootstrap-server localhost:9092 --topic second-topic --property parse.key=true --property key.separator=:
 
@@ -81,6 +90,9 @@ https://zookeeper.apache.org/  == To know what zooker does?
     kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic second-topic --property print.key=true --property print.value=true --property print.timestamp=true
 
     kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic second-topic --property print.key=true --property print.value=true --property print.timestamp=true --formatter kafka.tools.DefaultMessageFormatter
+
+** Create partition of the topic**
+.\bin\windows\kafka-topics.bat --bootstrap-server localhost:9092 --create --topic Day2_first_topic_partion --partitions 3
 
 
 Commands: 
@@ -139,11 +151,27 @@ Type messages as:
 Consumer: C:\Users\030841744\Desktop\kafka\bin\windows>kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic first_topic
 
 
-
-
-
-
 https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/19.0.x?topic=emitter-enabling-kafka-broker-trace
+
+
+**as of now this does not work (single kakfa)**
+
+    kafka-topics.sh --bootstrap-server localhost:9092 --create --topic d2-second-topic --partitions 3 --replication-factor 3
+
+**without group**
+
+    kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic d2-first-topic
+
+ **with group**
+
+    kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic d2-first-topic --group first-application
+
+    kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic d2-first-topic --group second-application
+
+    kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic d2-first-topic --group second-application
+
+    kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic d2-first-topic --group second-application
+
 
 
 
